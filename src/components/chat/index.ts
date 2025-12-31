@@ -3,6 +3,8 @@ export { FilePreviewCard } from "./FilePreviewCard";
 export { PastedContentCard } from "./PastedContentCard";
 export { ModelSelector } from "./ModelSelector";
 export { QuickActions } from "./QuickActions";
+export { PlusMenu } from "./PlusMenu";
+export { VoiceButton } from "./VoiceButton";
 export { Icons } from "./Icons";
 export * from "./types";
 export * from "./utils";

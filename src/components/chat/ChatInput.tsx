@@ -3,6 +3,8 @@ import { Icons } from "./Icons";
 import { FilePreviewCard } from "./FilePreviewCard";
 import { PastedContentCard } from "./PastedContentCard";
 import { ModelSelector } from "./ModelSelector";
+import { PlusMenu } from "./PlusMenu";
+import { VoiceButton } from "./VoiceButton";
 import { generateId } from "./utils";
 import type { AttachedFile, PastedContent, ChatMessage, Model } from "./types";
 
@@ -26,6 +28,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage = () => {} }
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -170,14 +173,10 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage = () => {} }
 
           <div className="flex gap-2 w-full items-center">
             <div className="relative flex-1 flex items-center shrink min-w-0 gap-1">
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                className="inline-flex items-center justify-center relative shrink-0 transition-colors duration-200 h-8 w-8 rounded-lg active:scale-95 text-muted-foreground hover:text-foreground hover:bg-bg-200"
-                type="button"
-                aria-label="Attach files"
-              >
-                <Icons.Plus className="w-5 h-5" />
-              </button>
+              <PlusMenu 
+                onAttachFile={() => fileInputRef.current?.click()}
+                onAttachImage={() => imageInputRef.current?.click()}
+              />
 
               <div className="flex shrink min-w-8 shrink-0 group relative">
                 <button
@@ -185,7 +184,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage = () => {} }
                   className={`transition-all duration-200 h-8 w-8 flex items-center justify-center rounded-lg active:scale-95
                     ${isThinkingEnabled
                       ? 'text-primary bg-primary/10'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-bg-200'}
+                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary'}
                   `}
                   aria-pressed={isThinkingEnabled}
                   aria-label="Extended thinking"
@@ -205,19 +204,18 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage = () => {} }
               </div>
 
               <div>
-                <button
-                  onClick={handleSend}
-                  disabled={!hasContent}
-                  className={`inline-flex items-center justify-center relative shrink-0 transition-colors h-8 w-8 rounded-xl active:scale-95
-                    ${hasContent
-                      ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-md'
-                      : 'bg-primary/30 text-primary-foreground/60 cursor-default'}
-                  `}
-                  type="button"
-                  aria-label="Send message"
-                >
-                  <Icons.ArrowUp className="w-4 h-4" />
-                </button>
+                {hasContent ? (
+                  <button
+                    onClick={handleSend}
+                    className="inline-flex items-center justify-center relative shrink-0 transition-colors h-8 w-8 rounded-xl active:scale-95 bg-primary text-primary-foreground hover:bg-primary/90 shadow-md"
+                    type="button"
+                    aria-label="Send message"
+                  >
+                    <Icons.ArrowUp className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <VoiceButton onClick={() => console.log('Voice mode activated')} />
+                )}
               </div>
             </div>
           </div>
@@ -235,6 +233,17 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage = () => {} }
         ref={fileInputRef}
         type="file"
         multiple
+        onChange={(e) => {
+          if (e.target.files) handleFiles(e.target.files);
+          e.target.value = '';
+        }}
+        className="hidden"
+      />
+      <input
+        ref={imageInputRef}
+        type="file"
+        multiple
+        accept="image/*"
         onChange={(e) => {
           if (e.target.files) handleFiles(e.target.files);
           e.target.value = '';
