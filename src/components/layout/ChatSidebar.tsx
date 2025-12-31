@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { PanelLeftClose, PanelLeft, MessageSquare, Plus } from "lucide-react";
+import { PanelLeftClose, PanelLeftOpen, MessageSquare, Plus } from "lucide-react";
 import voxsLogo from "@/assets/voxs-logo.png";
+import { AccountMenu } from "./AccountMenu";
 
 interface ChatHistory {
   id: string;
@@ -79,6 +80,11 @@ export const ChatSidebar = ({ isOpen, onToggle }: ChatSidebarProps) => {
               ))}
             </div>
           </div>
+
+          {/* Account Menu at bottom */}
+          <div className="p-3 border-t border-border">
+            <AccountMenu />
+          </div>
         </div>
       </aside>
 
@@ -89,9 +95,9 @@ export const ChatSidebar = ({ isOpen, onToggle }: ChatSidebarProps) => {
           className="fixed top-4 left-4 z-50 p-2 rounded-lg hover:bg-secondary transition-colors"
           aria-label="Open sidebar"
         >
-          <PanelLeft className="w-6 h-6 text-foreground" />
+          <PanelLeftOpen className="w-6 h-6 text-foreground" />
         </button>
       )}
     </>
   );
-};
+}

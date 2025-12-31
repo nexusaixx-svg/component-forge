@@ -1,4 +1,4 @@
-import { UserRoundX, BookOpen } from "lucide-react";
+import { BookOpen } from "lucide-react";
 
 export const Header = () => {
   return (
@@ -8,7 +8,7 @@ export const Header = () => {
         aria-label="Incognito mode"
         title="Incognito Mode"
       >
-        <UserRoundX className="w-5 h-5 text-foreground" />
+        <span className="text-xl">👻</span>
       </button>
       <button
         className="p-2 rounded-lg hover:bg-secondary transition-colors"
