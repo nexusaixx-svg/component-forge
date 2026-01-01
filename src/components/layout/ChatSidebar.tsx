@@ -34,7 +34,7 @@ export const ChatSidebar = ({ isOpen, onToggle }: ChatSidebarProps) => {
         } overflow-hidden`}
       >
         <div className="flex flex-col h-full w-64">
-          {/* Header with Logo */}
+          {/* Header with Logo/Icon */}
           <div className="flex items-center justify-between p-4 border-b border-border">
             <div
               className="relative w-8 h-8 cursor-pointer"
@@ -52,12 +52,6 @@ export const ChatSidebar = ({ isOpen, onToggle }: ChatSidebarProps) => {
                 />
               )}
             </div>
-            <button
-              className="p-2 rounded-lg hover:bg-secondary transition-colors"
-              aria-label="New chat"
-            >
-              <Plus className="w-5 h-5 text-foreground" />
-            </button>
           </div>
 
           {/* Chat History */}
@@ -81,6 +75,17 @@ export const ChatSidebar = ({ isOpen, onToggle }: ChatSidebarProps) => {
             </div>
           </div>
 
+          {/* New Chat Button - moved to bottom */}
+          <div className="p-3 border-t border-border">
+            <button
+              className="w-full flex items-center justify-center gap-2 p-2.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium text-sm"
+              aria-label="New chat"
+            >
+              <Plus className="w-4 h-4" />
+              <span>New chat</span>
+            </button>
+          </div>
+
           {/* Account Menu at bottom */}
           <div className="p-3 border-t border-border">
             <AccountMenu />
@@ -88,14 +93,14 @@ export const ChatSidebar = ({ isOpen, onToggle }: ChatSidebarProps) => {
         </div>
       </aside>
 
-      {/* Toggle button when closed */}
+      {/* Toggle button when closed - shows logo */}
       {!isOpen && (
         <button
           onClick={onToggle}
           className="fixed top-4 left-4 z-50 p-2 rounded-lg hover:bg-secondary transition-colors"
           aria-label="Open sidebar"
         >
-          <PanelLeftOpen className="w-6 h-6 text-foreground" />
+          <img src={voxsLogo} alt="VOXS" className="w-6 h-6 object-contain" />
         </button>
       )}
     </>

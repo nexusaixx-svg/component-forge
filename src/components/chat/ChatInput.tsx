@@ -13,9 +13,9 @@ interface ChatInputProps {
 }
 
 const defaultModels: Model[] = [
-  { id: "opus-4.5", name: "Opus 4.5", description: "Most capable for complex work" },
-  { id: "sonnet-4.5", name: "Sonnet 4.5", description: "Best for everyday tasks" },
-  { id: "haiku-4.5", name: "Haiku 4.5", description: "Fastest for quick answers" }
+  { id: "vox-3.5", name: "VOX v-3.5", description: "Fast and efficient for simple tasks" },
+  { id: "vox-4", name: "VOX v-4", description: "Balanced performance and capability" },
+  { id: "vox-4-mini", name: "VOX v-4 MINI", description: "Lightweight version for quick responses" },
 ];
 
 export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage = () => {} }) => {
@@ -23,7 +23,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage = () => {} }
   const [files, setFiles] = useState<AttachedFile[]>([]);
   const [pastedContent, setPastedContent] = useState<PastedContent[]>([]);
   const [isDragging, setIsDragging] = useState(false);
-  const [selectedModel, setSelectedModel] = useState("sonnet-4.5");
+  const [selectedModel, setSelectedModel] = useState("vox-4");
   const [isThinkingEnabled, setIsThinkingEnabled] = useState(false);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -133,7 +133,11 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage = () => {} }
       onDragLeave={onDragLeave}
       onDrop={onDrop}
     >
-      <div className="flex flex-col mx-2 md:mx-0 items-stretch transition-all duration-200 relative z-10 rounded-2xl cursor-text border-2 border-chat-border shadow-[0_0_20px_hsl(var(--chat-glow)/0.2)] hover:shadow-[0_0_25px_hsl(var(--chat-glow)/0.3)] focus-within:shadow-[0_0_30px_hsl(var(--chat-glow)/0.4)] bg-card font-sans antialiased">
+      <div className={`flex flex-col mx-2 md:mx-0 items-stretch transition-all duration-200 relative z-10 rounded-2xl cursor-text border-2 bg-card font-sans antialiased ${
+        hasContent 
+          ? 'border-chat-border shadow-[0_0_20px_hsl(var(--chat-glow)/0.3)]' 
+          : 'border-border'
+      }`}>
         <div className="flex flex-col px-3 pt-3 pb-2 gap-2">
           {(files.length > 0 || pastedContent.length > 0) && (
             <div className="flex gap-3 overflow-x-auto pb-2 px-1 scrollbar-thin">

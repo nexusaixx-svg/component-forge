@@ -44,7 +44,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({ models, selectedMo
       </button>
 
       {isOpen && (
-        <div className="absolute bottom-full right-0 mb-2 w-[260px] bg-card border border-border rounded-2xl shadow-dropdown overflow-hidden z-50 flex flex-col p-1.5 origin-bottom-right animate-in fade-in slide-in-from-bottom-2 duration-200">
+        <div className="absolute bottom-full right-0 mb-2 w-[280px] bg-card border border-border rounded-2xl shadow-dropdown overflow-hidden z-50 flex flex-col p-1.5 origin-bottom-right animate-in fade-in slide-in-from-bottom-2 duration-200">
           {models.map(model => (
             <button
               key={model.id}
@@ -52,7 +52,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({ models, selectedMo
                 onSelect(model.id);
                 setIsOpen(false);
               }}
-              className="w-full text-left px-3 py-2.5 rounded-xl flex items-start justify-between group transition-colors hover:bg-bg-200"
+              className="w-full text-left px-3 py-2.5 rounded-xl flex items-start justify-between group transition-colors hover:bg-secondary"
             >
               <div className="flex flex-col gap-0.5">
                 <div className="flex items-center gap-2">
@@ -63,7 +63,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({ models, selectedMo
                     <span className={`px-1.5 py-[1px] rounded-full text-[10px] font-medium border ${
                       model.badge === 'Upgrade'
                         ? 'border-primary/30 text-primary bg-primary/10'
-                        : 'border-bg-300 text-text-300'
+                        : 'border-border text-muted-foreground'
                     }`}>
                       {model.badge}
                     </span>
@@ -80,11 +80,44 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({ models, selectedMo
           ))}
 
           <div className="h-px bg-border my-1 mx-2" />
-
-          <button className="w-full text-left px-3 py-2.5 rounded-xl flex items-center justify-between group transition-colors hover:bg-bg-200 text-foreground">
-            <span className="text-[13px] font-semibold">More models</span>
-            <Icons.SelectArrow className="w-4 h-4 -rotate-90 text-muted-foreground" />
-          </button>
+          
+          <div className="px-3 py-2">
+            <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide mb-1">More models</p>
+          </div>
+          
+          {[
+            { id: "vox-4.5", name: "VOX v-4.5", description: "Advanced reasoning and analysis" },
+            { id: "vox-4-pro", name: "VOX v-4 PRO", description: "Maximum capability for complex work", badge: "PRO" },
+            { id: "vox-4.5-mini", name: "VOX v-4.5 MINI", description: "Fast with enhanced intelligence" },
+          ].map(model => (
+            <button
+              key={model.id}
+              onClick={() => {
+                onSelect(model.id);
+                setIsOpen(false);
+              }}
+              className="w-full text-left px-3 py-2.5 rounded-xl flex items-start justify-between group transition-colors hover:bg-secondary"
+            >
+              <div className="flex flex-col gap-0.5">
+                <div className="flex items-center gap-2">
+                  <span className="text-[13px] font-semibold text-foreground">
+                    {model.name}
+                  </span>
+                  {model.badge && (
+                    <span className="px-1.5 py-[1px] rounded-full text-[10px] font-medium border border-primary/30 text-primary bg-primary/10">
+                      {model.badge}
+                    </span>
+                  )}
+                </div>
+                <span className="text-[11px] text-muted-foreground">
+                  {model.description}
+                </span>
+              </div>
+              {selectedModel === model.id && (
+                <Icons.Check className="w-4 h-4 text-primary mt-1" />
+              )}
+            </button>
+          ))}
         </div>
       )}
     </div>
