@@ -45,6 +45,10 @@
 
     --radius: 0.75rem;
 
+    /* Blue accent for chatbox */
+    --chat-border: 210 100% 50%;
+    --chat-glow: 210 100% 60%;
+
     /* Extended palette for chat UI */
     --bg-200: 35 20% 95%;
     --bg-300: 35 18% 90%;
@@ -93,6 +97,10 @@
     --border: 30 10% 20%;
     --input: 30 10% 22%;
     --ring: 15 55% 58%;
+
+    /* Blue accent for chatbox */
+    --chat-border: 210 100% 55%;
+    --chat-glow: 210 100% 65%;
 
     /* Extended palette dark */
     --bg-200: 30 10% 15%;
@@ -157,5 +165,21 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* Seamless wave animation */
+  @keyframes wave-pulse {
+    0%, 100% {
+      transform: scaleY(0.5);
+      opacity: 0.4;
+    }
+    50% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+
+  .wave-bar {
+    animation: wave-pulse 1.2s ease-in-out infinite;
   }
 }

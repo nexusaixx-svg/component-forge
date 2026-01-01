@@ -73,6 +73,10 @@ export default {
           400: "hsl(var(--text-400))",
           500: "hsl(var(--text-500))",
         },
+        chat: {
+          border: "hsl(var(--chat-border))",
+          glow: "hsl(var(--chat-glow))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

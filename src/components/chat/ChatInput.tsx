@@ -133,7 +133,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage = () => {} }
       onDragLeave={onDragLeave}
       onDrop={onDrop}
     >
-      <div className="flex flex-col mx-2 md:mx-0 items-stretch transition-all duration-200 relative z-10 rounded-2xl cursor-text border border-border shadow-chat hover:shadow-chat-hover focus-within:shadow-chat-focus bg-card font-sans antialiased">
+      <div className="flex flex-col mx-2 md:mx-0 items-stretch transition-all duration-200 relative z-10 rounded-2xl cursor-text border-2 border-chat-border shadow-[0_0_20px_hsl(var(--chat-glow)/0.2)] hover:shadow-[0_0_25px_hsl(var(--chat-glow)/0.3)] focus-within:shadow-[0_0_30px_hsl(var(--chat-glow)/0.4)] bg-card font-sans antialiased">
         <div className="flex flex-col px-3 pt-3 pb-2 gap-2">
           {(files.length > 0 || pastedContent.length > 0) && (
             <div className="flex gap-3 overflow-x-auto pb-2 px-1 scrollbar-thin">
