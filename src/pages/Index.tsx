@@ -75,23 +75,9 @@ const Index = () => {
           </h1>
         </div>
 
-        {/* VOX Brain Indicator */}
-        <VoxBrainIndicator />
-
-        {/* Chat Input */}
-        <ChatInput onSendMessage={handleSendMessage} />
-
-        {/* Smart Recommendations - shown after user sends message */}
-        {showRecommendations && messages.length > 0 && (
-          <SmartRecommendations 
-            lastMessage={messages[messages.length - 1]}
-            onDismiss={() => setShowRecommendations(false)}
-          />
-        )}
-
-        {/* Message History (for demo) */}
+        {/* Message History (shown above chat input) */}
         {messages.length > 0 && (
-          <div className="w-full max-w-2xl mt-8 space-y-3">
+          <div className="w-full max-w-2xl mb-6 space-y-3">
             <h2 className="text-sm font-medium text-muted-foreground mb-3">Recent messages</h2>
             {messages.map((msg, idx) => (
               <div
@@ -103,6 +89,20 @@ const Index = () => {
             ))}
           </div>
         )}
+
+        {/* Smart Recommendations - shown after user sends message */}
+        {showRecommendations && messages.length > 0 && (
+          <SmartRecommendations 
+            lastMessage={messages[messages.length - 1]}
+            onDismiss={() => setShowRecommendations(false)}
+          />
+        )}
+
+        {/* VOX Brain Indicator */}
+        <VoxBrainIndicator />
+
+        {/* Chat Input */}
+        <ChatInput onSendMessage={handleSendMessage} />
       </main>
     </div>
   );
