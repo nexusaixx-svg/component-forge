@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { User, Settings, Sparkles, CreditCard, LogOut, ChevronRight } from "lucide-react";
+import { User, Settings, Sparkles, CreditCard, LogOut, ChevronRight, Shield } from "lucide-react";
 
 export const AccountMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +18,7 @@ export const AccountMenu: React.FC = () => {
   const menuItems = [
     { icon: Settings, label: "Personalization", onClick: () => setIsOpen(false) },
     { icon: Sparkles, label: "VOXS", onClick: () => setIsOpen(false) },
+    { icon: Shield, label: "Privacy Dashboard", onClick: () => setIsOpen(false) },
     { icon: CreditCard, label: "Upgrade Plan", onClick: () => setIsOpen(false) },
     { icon: LogOut, label: "Sign Out", onClick: () => setIsOpen(false) },
   ];
@@ -50,6 +51,13 @@ export const AccountMenu: React.FC = () => {
               <span className="text-sm">{item.label}</span>
             </button>
           ))}
+          
+          {/* Privacy note */}
+          <div className="px-3 py-2 mt-1 border-t border-border">
+            <p className="text-[10px] text-muted-foreground leading-relaxed">
+              Your data never leaves this site. No ads. No tracking. Just better results.
+            </p>
+          </div>
         </div>
       )}
     </div>

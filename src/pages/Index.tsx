@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { ChatInput, QuickActions, getGreeting } from "@/components/chat";
+import { ChatInput, getGreeting } from "@/components/chat";
 import { ChatSidebar, Header } from "@/components/layout";
+import { VoxBrainIndicator } from "@/components/features/VoxBrainIndicator";
+import { LiveContextButton } from "@/components/features/LiveContextButton";
+import { SmartRecommendations } from "@/components/features/SmartRecommendations";
 import type { ChatMessage } from "@/components/chat";
 import voxsLogo from "@/assets/voxs-logo.png";
 
 const Index = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showRecommendations, setShowRecommendations] = useState(false);
   const greeting = getGreeting();
   const userName = "there";
 
@@ -17,6 +21,9 @@ const Index = () => {
     console.log('Model:', data.model);
     console.log('Thinking enabled:', data.isThinkingEnabled);
     setMessages(prev => [...prev, data.message]);
+    
+    // Show recommendations after sending a message
+    setTimeout(() => setShowRecommendations(true), 1000);
   };
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -28,6 +35,9 @@ const Index = () => {
       
       {/* Header */}
       <Header />
+
+      {/* Live Context Button - floating */}
+      <LiveContextButton />
 
       {/* Main Content */}
       <main
@@ -65,11 +75,19 @@ const Index = () => {
           </h1>
         </div>
 
-      {/* Chat Input */}
-      <ChatInput onSendMessage={handleSendMessage} />
+        {/* VOX Brain Indicator */}
+        <VoxBrainIndicator />
 
-      {/* Quick Actions */}
-      <QuickActions />
+        {/* Chat Input */}
+        <ChatInput onSendMessage={handleSendMessage} />
+
+        {/* Smart Recommendations - shown after user sends message */}
+        {showRecommendations && messages.length > 0 && (
+          <SmartRecommendations 
+            lastMessage={messages[messages.length - 1]}
+            onDismiss={() => setShowRecommendations(false)}
+          />
+        )}
 
         {/* Message History (for demo) */}
         {messages.length > 0 && (
