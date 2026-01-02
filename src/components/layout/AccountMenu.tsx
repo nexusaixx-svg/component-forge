@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { User, Settings, Sparkles, CreditCard, LogOut, ChevronRight, Shield } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const AccountMenu: React.FC = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -19,7 +21,7 @@ export const AccountMenu: React.FC = () => {
     { icon: Settings, label: "Personalization", onClick: () => setIsOpen(false) },
     { icon: Sparkles, label: "VOXS", onClick: () => setIsOpen(false) },
     { icon: Shield, label: "Privacy Dashboard", onClick: () => setIsOpen(false) },
-    { icon: CreditCard, label: "Upgrade Plan", onClick: () => setIsOpen(false) },
+    { icon: CreditCard, label: "Upgrade Plan", onClick: () => { setIsOpen(false); navigate('/pricing'); } },
     { icon: LogOut, label: "Sign Out", onClick: () => setIsOpen(false) },
   ];
 

@@ -120,6 +120,44 @@
     --sidebar-border: 30 10% 18%;
     --sidebar-ring: 15 55% 58%;
   }
+
+  /* Ghost Mode Theme */
+  .ghost-mode {
+    --background: 240 10% 8%;
+    --foreground: 240 5% 90%;
+    --card: 240 10% 12%;
+    --card-foreground: 240 5% 90%;
+    --popover: 240 10% 12%;
+    --popover-foreground: 240 5% 90%;
+    --primary: 270 60% 60%;
+    --primary-foreground: 240 10% 8%;
+    --secondary: 240 8% 16%;
+    --secondary-foreground: 240 5% 85%;
+    --muted: 240 8% 18%;
+    --muted-foreground: 240 5% 55%;
+    --accent: 240 8% 20%;
+    --accent-foreground: 240 5% 85%;
+    --border: 240 8% 20%;
+    --input: 240 8% 18%;
+    --ring: 270 60% 60%;
+    --chat-border: 270 60% 55%;
+    --chat-glow: 270 60% 65%;
+    --sidebar-background: 240 10% 10%;
+    --sidebar-foreground: 240 5% 85%;
+    --sidebar-primary: 270 60% 60%;
+    --sidebar-primary-foreground: 240 10% 8%;
+    --sidebar-accent: 240 8% 18%;
+    --sidebar-accent-foreground: 240 5% 85%;
+    --sidebar-border: 240 8% 18%;
+    --sidebar-ring: 270 60% 60%;
+    
+    /* Ghost-specific tokens */
+    --ghost-accent: 270 60% 60%;
+    --ghost-card: 240 10% 12%;
+    --ghost-border: 270 30% 30%;
+    --ghost-foreground: 240 5% 90%;
+    --ghost-muted: 240 5% 60%;
+  }
 }
 
 @layer base {
@@ -170,15 +208,18 @@
   /* Smooth flowing wave animation */
   @keyframes wave-flow {
     0%, 100% {
-      transform: scaleY(0.4);
+      transform: scaleY(0.35);
+      opacity: 0.7;
     }
     50% {
       transform: scaleY(1);
+      opacity: 1;
     }
   }
 
   .wave-bar-smooth {
-    animation: wave-flow 0.8s ease-in-out infinite;
-    transform-origin: bottom;
+    animation: wave-flow 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    transform-origin: center;
+    will-change: transform, opacity;
   }
 }

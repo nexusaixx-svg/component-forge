@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
 
+// Ghost mode colors added to extend theme
+
 export default {
   darkMode: ["class"],
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
@@ -76,6 +78,14 @@ export default {
         chat: {
           border: "hsl(var(--chat-border))",
           glow: "hsl(var(--chat-glow))",
+        },
+        // Ghost mode colors
+        ghost: {
+          accent: "hsl(var(--ghost-accent, 270 60% 60%))",
+          card: "hsl(var(--ghost-card, 240 10% 12%))",
+          border: "hsl(var(--ghost-border, 270 30% 30%))",
+          foreground: "hsl(var(--ghost-foreground, 240 5% 90%))",
+          muted: "hsl(var(--ghost-muted, 240 5% 60%))",
         },
       },
       borderRadius: {
